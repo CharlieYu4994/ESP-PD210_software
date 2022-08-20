@@ -1,6 +1,14 @@
 {
   "C_Cpp.intelliSenseEngine": "Tag Parser",
   "files.associations": {
-    "stdio.h": "c"
-  }
+    "stdio.h": "c",
+    "*.inc": "c",
+    "ssd1316.h": "c",
+    "gpio.h": "c",
+    "i2c_manager.h": "c"
+  },
+  "idf.adapterTargetName": "esp32c3",
+  "idf.openOcdConfigs": [
+    "board/esp32c3-builtin.cfg"
+  ]
 }

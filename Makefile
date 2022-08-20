@@ -3,6 +3,6 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := sample_project
+PROJECT_NAME := ESP-PD210
 
 include $(IDF_PATH)/make/project.mk

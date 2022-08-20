@@ -1,0 +1,6 @@
+menu "I2C Port Settings"
+	depends on !HAVE_I2C_MANAGER
+
+	rsource "i2c_manager/Kconfig"
+
+endmenu
