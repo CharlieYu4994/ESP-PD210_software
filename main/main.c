@@ -26,6 +26,10 @@ static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
 SemaphoreHandle_t xGuiSemaphore;
 
+static lv_color_t *buf = NULL;
+static lv_disp_draw_buf_t disp_buf;
+static lv_disp_drv_t disp_drv;
+
 void app_main(void)
 {
     xTaskCreate(guiTask, "gui", 4096 * 2, NULL, 0, NULL);
@@ -41,20 +45,15 @@ static void guiTask(void *pvParameter)
 
     ssd1316_init();
 
-    lv_color_t *buf1 = heap_caps_malloc(2048 * sizeof(lv_color_t), MALLOC_CAP_DMA);
+    buf = heap_caps_malloc(2048 * sizeof(lv_color_t), MALLOC_CAP_DMA);
     assert(buf1 != NULL);
-    static lv_color_t *buf2 = NULL;
-    static lv_disp_draw_buf_t disp_buf;
 
-    uint32_t size_in_px = 4096;
+    lv_disp_draw_buf_init(&disp_buf, buf, NULL, 4096);
 
-    lv_disp_draw_buf_init(&disp_buf, buf1, buf2, size_in_px);
-
-    lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);
     disp_drv.flush_cb = ssd1316_flush;
     disp_drv.rounder_cb = ssd1316_rounder;
-    disp_drv.set_px_cb = ssd1316_set_px_cb;
+    disp_drv.set_px_cb = ssd1316_set_px;
     disp_drv.draw_buf = &disp_buf;
     lv_disp_drv_register(&disp_drv);
 
