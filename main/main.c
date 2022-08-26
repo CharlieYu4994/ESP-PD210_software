@@ -46,7 +46,7 @@ static void guiTask(void *pvParameter)
     ssd1316_init();
 
     buf = heap_caps_malloc(2048 * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    assert(buf1 != NULL);
+    assert(buf != NULL);
 
     lv_disp_draw_buf_init(&disp_buf, buf, NULL, 4096);
 
@@ -75,7 +75,7 @@ static void guiTask(void *pvParameter)
         }
     }
 
-    free(buf1);
+    free(buf);
     vTaskDelete(NULL);
 }
 
